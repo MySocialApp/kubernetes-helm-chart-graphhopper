@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "kubernetes.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "kubernetes.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.graphhopperReplicaCount }}
+  progressDeadlineSeconds: 36000
+  template:
+    metadata:
+      labels:
+        app: {{ template "kubernetes.name" . }}
+    spec:
+      nodeSelector:
+        type: {{ .Values.graphhopperNodeSelector }}
+      containers:
+      - name: {{ template "kubernetes.name" . }}
+        image: quay.io/nousmotards/container-graphhopper:{{ .Values.graphhopperImageVersion }}
+        command:
+          - "/bin/bash"
+          - "-c"
+          - "ln -s /config/config.properties /home/graphhopper/ && /home/graphhopper/run.sh"
+        env:
+          - name: JAVA_OPTIONS
+            value: {{ .Values.graphhopperJavaOptions | quote }}
+        volumeMounts:
+          - name: graphhopper-config
+            mountPath: /config
+            readOnly: true
+          - name: graphhopper-data
+            mountPath: /data
+      volumes:
+        - name: graphhopper-config
+          configMap:
+            name: {{ template "kubernetes.name" . }}
+        - name: graphhopper-data
+          hostPath:
+            path: /mnt/data/{{ .Release.Namespace }}/graphhopper

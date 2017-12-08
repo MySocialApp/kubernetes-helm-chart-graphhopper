@@ -1,0 +1,4 @@
+graphhopperReplicaCount: 1
+graphhopperNodeSelector: worker
+graphhopperImageVersion: v0.4
+graphhopperJavaOptions: "-XX:+UseG1GC -server -Xconcurrentio -Xmx2048m -Xms2048m -Dserver.port=8080"
