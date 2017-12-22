@@ -17,7 +17,9 @@ spec:
         app: {{ template "kubernetes.name" . }}
     spec:
       nodeSelector:
-        type: {{ .Values.graphhopperNodeSelector }}
+        {{- range $key, $val := .Values.graphhopperNodeSelector }}
+        {{ $key }}: {{ $val | quote }}
+        {{- end}}
       containers:
       - name: {{ template "kubernetes.name" . }}
         image: quay.io/nousmotards/container-graphhopper:{{ .Values.graphhopperImageVersion }}

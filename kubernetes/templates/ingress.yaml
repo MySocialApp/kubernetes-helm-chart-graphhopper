@@ -1,0 +1,24 @@
+{{- if .Values.graphhopperEnabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "kubernetes.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "kubernetes.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    external-dns.alpha.kubernetes.io/target: {{ .Values.graphhopperDnsTarget }}
+spec:
+  rules:
+  - host: {{ .Release.Namespace }}-{{ template "kubernetes.name" . }}.{{ .Values.graphhopperFQDN }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ template "kubernetes.name" . }}
+          servicePort: 8989
+{{- end -}}

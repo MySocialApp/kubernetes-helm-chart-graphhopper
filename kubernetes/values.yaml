@@ -1,4 +1,10 @@
 graphhopperReplicaCount: 1
-graphhopperNodeSelector: worker
+graphhopperNodeSelector:
+  node-role.kubernetes.io/node: "true"
+
+graphhopperEnabled: false
+graphhopperDnsTarget: "your_dns_target_access"
+graphhopperFQDN: "your_fqdn"
+
 graphhopperImageVersion: v0.4
 graphhopperJavaOptions: "-XX:+UseG1GC -server -Xconcurrentio -Xmx2048m -Xms2048m -Dserver.port=8080"
