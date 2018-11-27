@@ -6,5 +6,13 @@ graphhopperEnabled: false
 graphhopperDnsTarget: "your_dns_target_access"
 graphhopperFQDN: "your_fqdn"
 
-graphhopperImageVersion: v0.4
+graphhopperImageVersion: v0.5
 graphhopperJavaOptions: "-XX:+UseG1GC -server -Xconcurrentio -Xmx2048m -Xms2048m -Dserver.port=8080"
+
+graphhopperResources: {}
+#  limits:
+#    cpu: 2
+#    memory: 31G
+#  requests:
+#    cpu: 2
+#    memory: 30G

@@ -1,4 +1,4 @@
 apiVersion: v1
 description: Graphhopper Helm chart for Kubernetes
 name: graphhopper
-version: 0.2.0
+version: 0.3.0

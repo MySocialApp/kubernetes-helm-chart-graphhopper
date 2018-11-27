@@ -30,6 +30,8 @@ spec:
         env:
           - name: JAVA_OPTIONS
             value: {{ .Values.graphhopperJavaOptions | quote }}
+        resources:
+{{ toYaml .Values.graphhopperResources | indent 10 }}
         volumeMounts:
           - name: graphhopper-config
             mountPath: /config
