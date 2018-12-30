@@ -9,6 +9,7 @@ graphhopperFQDN: "your_fqdn"
 graphhopperImageVersion: v0.5
 graphhopperJavaOptions: "-XX:+UseG1GC -server -Xconcurrentio -Xmx2048m -Xms2048m -Dserver.port=8080"
 
+graphhopperStoragePrefix: "/mnt/data"
 graphhopperResources: {}
 #  limits:
 #    cpu: 2

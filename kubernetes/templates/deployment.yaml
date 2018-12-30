@@ -44,4 +44,4 @@ spec:
             name: {{ template "kubernetes.name" . }}
         - name: graphhopper-data
           hostPath:
-            path: /mnt/data/{{ .Release.Namespace }}/graphhopper
+            path: {{ .Values.graphhopperStoragePrefix }}/{{ .Release.Namespace }}/graphhopper
