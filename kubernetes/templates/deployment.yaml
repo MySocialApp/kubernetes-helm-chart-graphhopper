@@ -15,6 +15,9 @@ spec:
     metadata:
       labels:
         app: {{ template "kubernetes.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
     spec:
       nodeSelector:
         {{- range $key, $val := .Values.graphhopperNodeSelector }}
@@ -22,7 +25,7 @@ spec:
         {{- end}}
       containers:
       - name: {{ template "kubernetes.name" . }}
-        image: quay.io/nousmotards/container-graphhopper:{{ .Values.graphhopperImageVersion }}
+        image: {{ .Values.graphhopperImage }}:{{ .Values.graphhopperImageVersion }}
         command:
           - "/bin/bash"
           - "-c"

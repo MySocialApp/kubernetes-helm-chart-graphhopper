@@ -6,6 +6,7 @@ graphhopperEnabled: false
 graphhopperDnsTarget: "your_dns_target_access"
 graphhopperFQDN: "your_fqdn"
 
+graphhopperImage: "quay.io/nousmotards/container-graphhopper"
 graphhopperImageVersion: v0.5
 graphhopperJavaOptions: "-XX:+UseG1GC -server -Xconcurrentio -Xmx2048m -Xms2048m -Dserver.port=8080"
 
