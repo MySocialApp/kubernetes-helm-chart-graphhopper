@@ -12,5 +12,10 @@ spec:
   ports:
     - name: graphhopper
       port: 8989
+    - name: graphhopper-admin
+      port: 8990
+    - name: web
+      targetPort: 8989
+      port: 80
   selector:
     app: {{ template "kubernetes.name" . }}
